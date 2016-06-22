@@ -83,7 +83,7 @@ public class ProductServlet extends BaseServlet {
         response.addCookie(cookie);
 
         // 2.调用service
-        ProductService ps=(ProductService) BeanFactory.getBean("ProductService");
+        ProductService ps = (ProductService) BeanFactory.getBean("ProductService");
         Product p = null;
         try {
             p = ps.getById(pid);
@@ -111,7 +111,7 @@ public class ProductServlet extends BaseServlet {
         int pageSize = 6;
 
         // 2.调用service 返回pageBean
-        ProductService ps=(ProductService) BeanFactory.getBean("ProductService");
+        ProductService ps = (ProductService) BeanFactory.getBean("ProductService");
         PageBean<Product> bean = ps.findByPage(currPage, pageSize, cid);
 
         // 3.将结果放入request中请求转发
