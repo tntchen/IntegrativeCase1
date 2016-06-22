@@ -9,6 +9,7 @@ import com.itheima.dao.UserDao;
 import com.itheima.dao.impl.UserDaoImpl;
 import com.itheima.domain.User;
 import com.itheima.service.UserService;
+import com.itheima.utils.BeanFactory;
 import com.itheima.utils.MailUtils;
 
 public class UserServiceImpl implements UserService {
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void regist(User user) throws SQLException, AddressException, MessagingException {
-        UserDao dao = new UserDaoImpl();
+        UserDao dao=(UserDao) BeanFactory.getBean("UserDao");
         dao.add(user);
 
         // 发送邮件
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User active(String code) throws SQLException {
-        UserDao dao = new UserDaoImpl();
+        UserDao dao=(UserDao) BeanFactory.getBean("UserDao");
         // 1.通过code获取一个用户
         User user = dao.getByCode(code);
 
@@ -61,7 +62,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User login(String username, String password) throws SQLException {
-        UserDao dao = new UserDaoImpl();
+        UserDao dao=(UserDao) BeanFactory.getBean("UserDao");
         return dao.getUserByUsernameAndPwd(username, password);
     }
 

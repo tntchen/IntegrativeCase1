@@ -15,7 +15,7 @@ public class BaseServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 重写的service方法,利用装饰者模式进行了加强
+     * 重写的service方法,利用继承进行了加强
      */
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response)
@@ -36,11 +36,11 @@ public class BaseServlet extends HttpServlet {
             Method method = clazz.getMethod(m, HttpServletRequest.class, HttpServletResponse.class);
 
             // 4.让方法执行,返回值为请求转发的路径
-            String s = (String) method.invoke(this, request, response);
+            String path = (String) method.invoke(this, request, response);
 
             // 5.判断s是否为空
-            if (s != null) {
-                request.getRequestDispatcher(s).forward(request, response);
+            if (path != null) {
+                request.getRequestDispatcher(path).forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();

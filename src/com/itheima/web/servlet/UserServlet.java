@@ -17,6 +17,7 @@ import com.itheima.domain.User;
 import com.itheima.myconverter.MyConverter;
 import com.itheima.service.UserService;
 import com.itheima.service.impl.UserServiceImpl;
+import com.itheima.utils.BeanFactory;
 import com.itheima.utils.MD5Utils;
 import com.itheima.utils.UUIDUtils;
 
@@ -64,7 +65,7 @@ public class UserServlet extends BaseServlet {
         user.setPassword(MD5Utils.md5(user.getPassword()));
 
         // 2.调用service完成注册
-        UserService s = new UserServiceImpl();
+        UserService s=(UserService) BeanFactory.getBean("UserService");
         s.regist(user);
 
         // 3.页面请求转发
@@ -86,7 +87,7 @@ public class UserServlet extends BaseServlet {
         String code = request.getParameter("code");
 
         // 2.调用seervice完成激活
-        UserService s = new UserServiceImpl();
+        UserService s=(UserService) BeanFactory.getBean("UserService");
         User user = s.active(code);
         if (user == null) {
             // 通过激活码未找到用户
@@ -128,7 +129,7 @@ public class UserServlet extends BaseServlet {
         password = MD5Utils.md5(password);
 
         // 2.调用service完成登录返回user
-        UserService s = new UserServiceImpl();
+        UserService s=(UserService) BeanFactory.getBean("UserService");
         User user = s.login(username, password);
 
         // 3.判断用户
