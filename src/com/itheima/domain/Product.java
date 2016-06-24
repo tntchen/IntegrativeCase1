@@ -1,8 +1,9 @@
 package com.itheima.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Product {
+public class Product implements Serializable {
     private String pid;
     private String pname;
     private Double market_price;
